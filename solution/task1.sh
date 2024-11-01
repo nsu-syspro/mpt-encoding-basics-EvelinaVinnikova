@@ -1,6 +1,4 @@
 #!/bin/bash
-f="$1"
-  if [[ "UTF-8" != "$(uchardet "$f")" ]]; then
-    echo "$f undecoded in utf-8"
-    exit 1
-  fi
+enc=$(unchardet $1)
+iconv -f $enc -t UTF8 $1 > "$1.decoded"
+mv "$1.decoded" "$1"
